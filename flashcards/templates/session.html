@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+  <section aria-labelledby="session-heading"
+           data-token="{{ token }}"
+           data-deck-id="{{ deck_id }}"
+           data-deck-title="{{ deck_title }}">
+    <h2 id="session-heading">{{ deck_title }}</h2>
+
+    <div class="session-controls">
+      <label class="toggle">
+        <input id="toggle-remove" type="checkbox" checked>
+        <span>Simple mode: remove cards on “Got it”</span>
+      </label>
+      <button id="restart-btn" type="button">Restart deck</button>
+      <a class="muted" href="{{ url_for('index') }}">Back to decks</a>
+    </div>
+
+    <div id="progress" class="progress" aria-live="polite">Loading...</div>
+
+    <div id="card" class="card" role="button" tabindex="0" aria-pressed="false" aria-label="Flashcard">
+      <div id="card-face" class="card-face">...</div>
+    </div>
+
+    <div class="actions">
+      <button id="show-btn" type="button">Show answer (Space)</button>
+      <button id="got-btn" type="button" disabled>Got it (G)</button>
+      <button id="again-btn" type="button" disabled>Again (A)</button>
+    </div>
+
+    <p class="muted shortcut-hint">
+      Shortcuts: Space = flip, G = Got it, A = Again
+    </p>
+  </section>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+{% endblock %}

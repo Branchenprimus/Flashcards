@@ -1,0 +1,9 @@
+decks:
+- title: "Networking Basics"
+  cards:
+  - q: "What is a subnet mask?"
+    a: "A number that divides IP addresses into network and host parts."
+- title: "HTTP"
+  cards:
+  - q: "Default HTTP port?"
+    a: "80."

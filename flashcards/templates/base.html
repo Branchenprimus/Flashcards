@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>{{ title if title else "Flashcards" }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container">
+      <h1 class="site-title"><a href="{{ url_for('index') }}">Flashcards</a></h1>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash" role="status" aria-live="polite">
+          {% for m in messages %}<div class="flash-item">{{ m }}</div>{% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <small>Local-only demo. Data is stored in-memory and lost on restart.</small>
+    </div>
+  </footer>
+</body>
+</html>

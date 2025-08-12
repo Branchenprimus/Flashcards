@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+  <section aria-labelledby="upload-heading">
+    <h2 id="upload-heading">Upload YAML Decks</h2>
+    {% if error %}
+      <div class="error" role="alert">{{ error }}</div>
+    {% endif %}
+
+    <p>Upload a <code>.yml</code>/<code>.yaml</code> file containing one or more decks. See <a href="https://yaml.org/">YAML</a> examples in the README.</p>
+
+    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data" class="upload-form" aria-describedby="upload-help">
+      <input type="file" name="yaml_file" accept=".yml,.yaml" required aria-label="Choose YAML file">
+      <button type="submit">Upload</button>
+      <p id="upload-help" class="muted">Max size: 1 MB. Parsed with <code>yaml.safe_load</code>.</p>
+    </form>
+  </section>
+
+  {% if decks and token %}
+    <hr>
+    <section aria-labelledby="decks-heading">
+      <h2 id="decks-heading">Detected Decks</h2>
+      <ul class="deck-list" role="list">
+        {% for deck in decks %}
+          <li class="deck-item">
+            <div class="deck-title">{{ deck.title }}</div>
+            <div class="deck-meta">{{ deck.cards|length }} cards</div>
+            <a class="button" href="{{ url_for('session_page', deck_id=deck.id, token=token) }}">Start</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+{% endblock %}
