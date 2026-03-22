@@ -1,0 +1,21 @@
+services:
+  flashcards:
+    build: .
+    container_name: flashcards
+    ports:
+      - "5000:5000"
+    environment:
+      SECRET_KEY: ${SECRET_KEY:-dev-local-only}
+      HOST: 0.0.0.0
+      PORT: 5000
+      FLASK_DEBUG: 0
+    restart: unless-stopped
+    develop:
+      watch:
+        - action: rebuild
+          path: .
+          ignore:
+            - .git/**
+            - .venv/**
+            - "**/__pycache__/**"
+            - "**/*.pyc"

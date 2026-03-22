@@ -1,0 +1,9 @@
+tunnel: mac-ssh
+credentials-file: /home/jan/.cloudflared/9fe5da5e-67a3-4841-9ccb-a7fc313f540c.json
+
+ingress:
+  - hostname: flashcards.darwin-labs.org
+    service: http://localhost:5000
+  - hostname: ssh.darwin-labs.org
+    service: ssh://localhost:22
+  - service: http_status:404

@@ -162,6 +162,8 @@ def too_large(_e):
     return error_response("File too large. Limit is 1 MB.", 413)
 
 
-# Local-only run guard: bind to 127.0.0.1 by default
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    host = os.environ.get("HOST", "127.0.0.1")
+    port = int(os.environ.get("PORT", "5000"))
+    debug = os.environ.get("FLASK_DEBUG", "1") == "1"
+    app.run(host=host, port=port, debug=debug)
